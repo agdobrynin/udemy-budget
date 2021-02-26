@@ -8,7 +8,7 @@
           <ElButton type="danger">удалить</ElButton>
         </div>
       </template>
-      <ElAlert v-else type="warning" :closable="false">Записей нет.</ElAlert>
+      <ElAlert v-else type="info" show-icon :closable="false">Записей нет.</ElAlert>
     </ElCard>
   </div>
 </template>
