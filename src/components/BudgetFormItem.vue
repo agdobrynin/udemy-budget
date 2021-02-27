@@ -52,15 +52,15 @@ export default {
      */
     rules: {
       type: [
-        {required: true, message: "Укажите тип", trigger: "change"}
+        {required: true, message: "Укажите тип", trigger: "submit"}
       ],
       comment: [
-        {required: true, message: "Отметьте комментарий"}
+        {required: true, message: "Отметьте комментарий", trigger: "submit"}
       ],
       value: [
-        {required: true, message: "Введите сумму"},
-        {type: "number", message: "Необходимо ввести число"},
-        {validator: checkSum},
+        {required: true, message: "Введите сумму", trigger: "submit"},
+        {type: "number", message: "Необходимо ввести число", trigger: "submit"},
+        {validator: checkSum, trigger: "submit"},
       ],
     },
     typeOfBudgetTitles: []
