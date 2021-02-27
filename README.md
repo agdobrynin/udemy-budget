@@ -1,6 +1,6 @@
 # balance
 
-[Live demo](https://agdobrynin.github.io/udemy-budget/dist/)
+[Live demo](https://agdobrynin.github.io/udemy-budget/dist/index.html)
 
 ## Project setup
 ```
