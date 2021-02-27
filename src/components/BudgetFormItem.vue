@@ -56,7 +56,7 @@ export default {
       ],
     },
     typeOfBudget: {
-      INCOME: "Приход",
+      INCOME: "Доход",
       OUTCOME: "Расход"
     }
   }),
