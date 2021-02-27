@@ -1,4 +1,4 @@
-import {BudgetItemAbstract} from "@/Dto/BudgetItemAbstract";
+import {BudgetItemAbstract} from "@/Entity/BudgetItemAbstract";
 
 export class BudgetItemIncome extends BudgetItemAbstract {
 

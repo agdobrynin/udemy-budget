@@ -15,11 +15,6 @@
 
 <script>
 
-// eslint-disable-next-line no-unused-vars
-import {BudgetItemOutcome} from "@/Dto/BudgetItemOutcome";
-// eslint-disable-next-line no-unused-vars
-import {BudgetItemIncome} from "@/Dto/BudgetItemIncome";
-
 export default {
   name: "BudgetList",
   props: {
@@ -47,7 +42,6 @@ export default {
 
 <style scoped>
 .budget-list-wrap {
-  max-width: 500px;
   margin: auto;
 }
 

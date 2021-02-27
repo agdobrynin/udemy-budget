@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <BudgetFormItem></BudgetFormItem>
     <TotalBalance :total="totalBalance"></TotalBalance>
     <BudgetList :list="list" @deleteItem="deleteItem"></BudgetList>
   </div>
@@ -8,15 +9,17 @@
 <script>
 import BudgetList from "@/components/BudgetList";
 import TotalBalance from "@/components/TotalBalance";
-import {BudgetItemIncome} from "@/Dto/BudgetItemIncome";
-import {BudgetItemOutcome} from "@/Dto/BudgetItemOutcome";
+import {BudgetItemIncome} from "@/Entity/BudgetItemIncome";
+import {BudgetItemOutcome} from "@/Entity/BudgetItemOutcome";
+import BudgetFormItem from "@/components/BudgetFormItem";
 
 export default {
   name: "App",
 
   components: {
     BudgetList,
-    TotalBalance
+    TotalBalance,
+    BudgetFormItem,
   },
 
   data: () => ({
@@ -54,6 +57,7 @@ export default {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  width: 500px;
+  margin: 60px auto;
 }
 </style>

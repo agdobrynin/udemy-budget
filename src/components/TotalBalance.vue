@@ -1,7 +1,7 @@
 <template>
-  <div class="balance">
+  <ElCard class="balance">
     Баланс = {{ total }}
-  </div>
+  </ElCard>
 </template>
 
 <script>
@@ -20,7 +20,6 @@ export default {
 <style scoped>
 .balance {
   font-size: 28px;
-  font-weight: bold;
-  padding: 1.2em 0em;
+  margin: 1em 0em;
 }
 </style>
