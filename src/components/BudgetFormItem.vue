@@ -104,9 +104,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.type-select {
-  width: 100%;
-}
-</style>
