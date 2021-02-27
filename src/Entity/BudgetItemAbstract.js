@@ -1,9 +1,8 @@
 export class BudgetItemAbstract {
-
-    comment = "";
-    _value = 0;
+    comment = undefined;
+    _value = NaN;
     id = undefined;
-    static _type = undefined;
+    static _typeTitle = undefined;
 
     /**
      * @param {String} comment
@@ -15,8 +14,16 @@ export class BudgetItemAbstract {
         this.id = BudgetItemAbstract.uid;
     }
 
-    static get type() {
-        return this._type;
+    get value() {
+        return this._value;
+    }
+
+    get typeTitle() {
+        return this.constructor._typeTitle;
+    }
+
+    static get typeTitle() {
+        return this._typeTitle;
     }
 
     static get uid() {

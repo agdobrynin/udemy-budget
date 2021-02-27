@@ -3,11 +3,11 @@
     <ElCard>
       <div slot="header" class="clearfix header">
         <span>{{ header }}</span>
-        <ElSelect class="filter" v-model="typeBudget">
-          <ElOption v-for="(typeBudget, index) in typeOfBudgetTitles"
-                    :key="index"
-                    :value="typeBudget"></ElOption>
-        </ElSelect>
+        <radio-group v-model="typeBudget" class="filter">
+          <radio-button v-for="(typeBudget, index) in typeOfBudgetTitles"
+                        :key="index"
+                        :label="typeBudget">{{typeBudget}}</radio-button>
+        </radio-group>
       </div>
       <template v-if="!isEmpty">
         <BudgetListItem v-for="item in filteredList"
@@ -26,6 +26,7 @@
 import BudgetListItem from "@/components/BudgetListItem";
 import {BudgetItemIncome} from "@/Entity/BudgetItemIncome";
 import {BudgetItemOutcome} from "@/Entity/BudgetItemOutcome";
+import {RadioGroup, RadioButton} from "element-ui";
 
 const FILTER_TYPE_ALL_TITLE = "Всё";
 
@@ -33,7 +34,9 @@ export default {
   name: "BudgetList",
 
   components: {
-    BudgetListItem
+    BudgetListItem,
+    RadioGroup,
+    RadioButton
   },
 
   props: {
@@ -69,7 +72,7 @@ export default {
       }
 
       this.filteredList = this.list.filter((item) => {
-        return item.constructor.type === type;
+        return item.typeTitle === type;
       });
     }
   },
@@ -86,8 +89,8 @@ export default {
 
   created() {
     this.typeOfBudgetTitles.push(this.typeBudget);
-    this.typeOfBudgetTitles.push(BudgetItemIncome.type);
-    this.typeOfBudgetTitles.push(BudgetItemOutcome.type);
+    this.typeOfBudgetTitles.push(BudgetItemIncome.typeTitle);
+    this.typeOfBudgetTitles.push(BudgetItemOutcome.typeTitle);
     this.filteredList = this.list;
   },
 }

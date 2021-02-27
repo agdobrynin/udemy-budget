@@ -1,6 +1,6 @@
 <template>
   <ElCard header="Добавить новый элемент бюджета">
-    <ElForm :model="formData" :rules="rules" ref="ruleForm">
+    <ElForm :model="formData" :rules="rules" label-width="120px" ref="ruleForm" @submit.prevent="onSave">
       <ElFormItem label="Тип" prop="type">
         <ElSelect class="type-select" v-model="formData.type">
           <ElOption v-for="(typeTitle, key) in typeOfBudgetTitles" :key="key" :label="typeTitle" :value="typeTitle"/>
@@ -12,7 +12,7 @@
       <ElFormItem label="Сумма" prop="value">
         <ElInput v-model.number="formData.value"></ElInput>
       </ElFormItem>
-      <ElButton @click="onSave" type="primary">Добавить</ElButton>
+      <ElButton type="primary">Добавить</ElButton>
     </ElForm>
   </ElCard>
 </template>
@@ -59,15 +59,15 @@ export default {
   }),
 
   created() {
-    this.typeOfBudgetTitles.push(BudgetItemIncome.type);
-    this.typeOfBudgetTitles.push(BudgetItemOutcome.type);
+    this.typeOfBudgetTitles.push(BudgetItemIncome.typeTitle);
+    this.typeOfBudgetTitles.push(BudgetItemOutcome.typeTitle);
   },
 
   methods: {
     async onSave() {
       this.$refs.ruleForm.validate((valid) => {
         if (valid) {
-          const BudgetItem = this.formData.type === BudgetItemIncome.type
+          const BudgetItem = this.formData.type === BudgetItemIncome.typeTitle
               ? new BudgetItemIncome(this.formData.comment, this.formData.value)
               : new BudgetItemOutcome(this.formData.comment, this.formData.value);
           this.$emit("newBudgetItem", BudgetItem);

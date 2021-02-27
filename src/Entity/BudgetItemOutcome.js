@@ -1,7 +1,7 @@
 import {BudgetItemAbstract} from "@/Entity/BudgetItemAbstract";
 
 export class BudgetItemOutcome extends BudgetItemAbstract {
-    static _type = "Расход";
+    static _typeTitle = "Расход";
 
     get value() {
         return -this._value;
