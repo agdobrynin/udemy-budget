@@ -32,8 +32,8 @@ const checkSum = (rule, value, callback) => {
 
 export default {
   name: "BudgetFormItem",
-  data: () => ({
 
+  data: () => ({
     formData: {
       type: undefined,
       comment: undefined,
