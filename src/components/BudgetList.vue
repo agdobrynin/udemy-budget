@@ -33,7 +33,7 @@ export default {
   },
 
   data: () => ({
-    header: "Бюджет",
+    header: "Расходы и доходы",
   }),
 
   computed: {
