@@ -1,5 +1,5 @@
 <template>
-  <ElCard class="balance">
+  <ElCard class="balance" :class="isNegative ? 'red': 'green'">
     Баланс = {{ total }}
   </ElCard>
 </template>
@@ -13,6 +13,10 @@ export default {
       type: Number,
       default: 0,
     },
+  },
+
+  computed: {
+    isNegative: self => self.total < 0,
   }
 }
 </script>
@@ -21,5 +25,12 @@ export default {
 .balance {
   font-size: 28px;
   margin: 1em 0em;
+}
+.red {
+  color: red;
+}
+
+.green {
+  color: green;
 }
 </style>
