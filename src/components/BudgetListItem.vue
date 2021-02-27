@@ -1,7 +1,10 @@
 <template>
   <div class="list-item">
+    <span class="icon">
+      <i :class="isNegative ? 'red el-icon-bottom': 'green el-icon-top'"></i>
+    </span>
     <span class="comment">{{ BudgetItem.comment }}</span>
-    <span class="value">{{ BudgetItem.value }}</span>
+    <span class="value" :class="isNegative ? 'red': 'green'">{{ BudgetItem.value }}</span>
     <ElButton type="danger" @click.prevent="deleteItem(BudgetItem.id)">удалить</ElButton>
   </div>
 </template>
@@ -38,6 +41,10 @@ export default {
       }).catch(() => {
       });
     }
+  },
+
+  computed: {
+    isNegative: self => self.BudgetItem.value < 0,
   }
 }
 </script>
@@ -55,4 +62,18 @@ export default {
   margin-right: 20px;
 }
 
+.red {
+  color: red;
+}
+
+.green {
+  color: green;
+}
+
+.icon {
+  color: #606266;
+  margin: 0 20px;
+  font-size: 1.5em;
+  vertical-align: middle;
+}
 </style>
