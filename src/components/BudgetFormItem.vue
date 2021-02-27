@@ -7,18 +7,29 @@
         ref="ruleForm"
         @submit.native.prevent="onSave">
       <ElFormItem label="Тип" prop="type">
-        <ElSelect class="type-select" v-model="formData.type">
-          <ElOption v-for="(typeTitle, key) in typeOfBudgetTitles"
-                    :key="key"
-                    :label="typeTitle"
-                    :value="typeTitle"/>
-        </ElSelect>
+        <el-row>
+          <el-col :span="16">
+            <ElSelect v-model="formData.type">
+              <ElOption v-for="(typeTitle, key) in typeOfBudgetTitles"
+                        :key="key"
+                        :label="typeTitle"
+                        :value="typeTitle"/>
+            </ElSelect>
+          </el-col>
+          <el-col :span="8">
+            <el-switch
+                v-model="formData.rememberType"
+                active-text="Запомнить"
+                inactive-text="">
+            </el-switch>
+          </el-col>
+        </el-row>
+      </ElFormItem>
+      <ElFormItem label="Сумма" prop="value">
+        <ElInput v-model.number="formData.value" ref="budgetValue"></ElInput>
       </ElFormItem>
       <ElFormItem label="Комментарий" prop="comment">
         <ElInput v-model="formData.comment"></ElInput>
-      </ElFormItem>
-      <ElFormItem label="Сумма" prop="value">
-        <ElInput v-model.number="formData.value"></ElInput>
       </ElFormItem>
       <ElButton native-type="submit" type="primary">Добавить</ElButton>
     </ElForm>
@@ -44,6 +55,7 @@ export default {
   data: () => ({
     formData: {
       type: undefined,
+      rememberType: false,
       comment: undefined,
       value: undefined,
     },
@@ -79,7 +91,13 @@ export default {
               ? new BudgetItemIncome(this.formData.comment, this.formData.value)
               : new BudgetItemOutcome(this.formData.comment, this.formData.value);
           this.$emit("newBudgetItem", BudgetItem);
+          let prevType = "";
+          if (this.formData.rememberType) {
+            prevType = this.formData.type;
+          }
           this.$refs.ruleForm.resetFields();
+          this.formData.type = prevType;
+          this.$refs.budgetValue.focus();
         }
       });
     }
