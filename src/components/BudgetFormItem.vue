@@ -68,7 +68,8 @@ export default {
           const BudgetItem = this.formData.type === this.typeOfBudget.INCOME
               ? new BudgetItemIncome(this.formData.comment, this.formData.value)
               : new BudgetItemOutcome(this.formData.comment, this.formData.value);
-          console.log(BudgetItem);
+          this.$emit("newBudgetItem", BudgetItem);
+          this.$refs.ruleForm.resetFields();
         }
       });
     }

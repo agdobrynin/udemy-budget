@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <BudgetFormItem></BudgetFormItem>
+    <BudgetFormItem @newBudgetItem="newBudgetItem"></BudgetFormItem>
     <TotalBalance :total="totalBalance"></TotalBalance>
     <BudgetList :list="list" @deleteItem="deleteItem"></BudgetList>
   </div>
@@ -30,11 +30,22 @@ export default {
   }),
 
   methods: {
+    /**
+     * Удалить из списка
+     * @param {string} id
+     */
     deleteItem(id) {
       const index = this.list.findIndex(item => item.id === id);
       if (index >= 0) {
         this.$delete(this.list, index);
       }
+    },
+    /**
+     * Добавить новый доход/расход
+     * @param {BudgetItemOutcome|BudgetItemIncome} budgetEntity
+     */
+    newBudgetItem(budgetEntity) {
+      this.list.push(budgetEntity);
     }
   },
 
