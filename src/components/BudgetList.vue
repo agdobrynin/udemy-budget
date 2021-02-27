@@ -2,7 +2,7 @@
   <div class="budget-list-wrap">
     <ElCard :header="header">
       <template v-if="!isEmpty">
-        <div class="list-item" v-for="(item, key) in list" :key="key">
+        <div class="list-item" v-for="item in list" :key="item.id">
           <span class="comment">{{ item.comment }}</span>
           <span class="value">{{ item.value }}</span>
           <ElButton type="danger" @click.prevent="deleteItem(item.id)">удалить</ElButton>
@@ -15,10 +15,16 @@
 
 <script>
 
+// eslint-disable-next-line no-unused-vars
+import {BudgetItemOutcome} from "@/Dto/BudgetItemOutcome";
+// eslint-disable-next-line no-unused-vars
+import {BudgetItemIncome} from "@/Dto/BudgetItemIncome";
+
 export default {
   name: "BudgetList",
   props: {
     list: {
+      /** @type{Array<BudgetItemOutcome|BudgetItemIncome>} */
       type: Array,
       default: () => ({}),
     }

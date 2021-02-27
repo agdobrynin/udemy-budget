@@ -8,7 +8,8 @@
 <script>
 import BudgetList from "@/components/BudgetList";
 import TotalBalance from "@/components/TotalBalance";
-import {BalanceItem} from "@/Dto/BalanceItem";
+import {BudgetItemIncome} from "@/Dto/BudgetItemIncome";
+import {BudgetItemOutcome} from "@/Dto/BudgetItemOutcome";
 
 export default {
   name: "App",
@@ -20,7 +21,7 @@ export default {
 
   data: () => ({
     /**
-     * @type{BalanceItem[]} list
+     * @type{BudgetItemIncome|BudgetItemOutcome[]} list
      */
     list: [],
   }),
@@ -36,14 +37,14 @@ export default {
 
   computed: {
     totalBalance() {
-      /** @type{BalanceItem} balanceItem */
+      /** @type{BudgetItemIncome|BudgetItemOutcome} balanceItem */
       return this.list.reduce((acc, balanceItem) => acc + balanceItem.value, 0);
     }
   },
 
   created: function () {
-    this.list.push(new BalanceItem("Первое поступление", 100, 1));
-    this.list.push(new BalanceItem("Первый расход", -50, 2));
+    this.list.push(new BudgetItemIncome("Первое поступление", 100));
+    this.list.push(new BudgetItemOutcome("Первый расход", 50));
   },
 }
 </script>
