@@ -1,5 +1,7 @@
 # balance
 
+[Live demo](https://agdobrynin.github.io/udemy-budget/dist/)
+
 ## Project setup
 ```
 npm install
