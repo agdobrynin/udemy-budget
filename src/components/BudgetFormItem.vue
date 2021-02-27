@@ -1,5 +1,5 @@
 <template>
-  <ElCard>
+  <ElCard header="Добавить новый элемент бюджета">
     <ElForm :model="formData" :rules="rules" ref="ruleForm">
       <ElFormItem label="Тип" prop="type">
         <ElSelect class="type-select" v-model="formData.type">
