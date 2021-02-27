@@ -7,6 +7,8 @@
 </template>
 
 <script>
+import {MessageBox} from "element-ui";
+
 export default {
   name: "BudgetListItem",
 
@@ -20,7 +22,21 @@ export default {
 
   methods: {
     deleteItem(id) {
-      this.$emit("deleteBudgetItem", id);
+      const { comment, value, typeTitle } = this.BudgetItem;
+
+      MessageBox.confirm(
+          `Удалить ${typeTitle} "${comment}" и суммой ${value}?`,
+          "Подтверждение удаления",
+          {
+            confirmButtonText: "Да",
+            cancelButtonText: "Нет",
+            type: "warning"
+          }).then((res) => {
+        if ("confirm" === res) {
+          this.$emit("deleteBudgetItem", id);
+        }
+      }).catch(() => {
+      });
     }
   }
 }
