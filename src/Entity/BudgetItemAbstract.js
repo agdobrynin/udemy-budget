@@ -9,8 +9,8 @@ export class BudgetItemAbstract {
      * @param {Number} value
      */
     constructor(comment, value) {
-        this.comment = comment;
-        this._value = value;
+        this.comment = comment || undefined;
+        this._value = Math.abs(Number(value)) || NaN;
         this.id = BudgetItemAbstract.uid;
     }
 
