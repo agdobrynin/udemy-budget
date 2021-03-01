@@ -5,15 +5,28 @@
     </span>
     <span class="comment">{{ BudgetItem.comment }}</span>
     <span class="value" :class="isNegative ? 'red': 'green'">{{ BudgetItem.value }}</span>
-    <ElButton type="danger" @click.prevent="deleteItem(BudgetItem.id)">удалить</ElButton>
+    <ElButton type="danger" @click.prevent="showDialog = true">удалить</ElButton>
+    <Dialog
+        title="Удалить запись?"
+        :visible.sync="showDialog">
+      <p>Удалить {{BudgetItem.typeTitle}} "{{BudgetItem.comment}}" и суммой <strong>{{BudgetItem.value}}</strong></p>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="showDialog = false">Нет</el-button>
+        <el-button type="primary" @click="deleteItem(BudgetItem.id)">Да</el-button>
+      </span>
+    </Dialog>
   </div>
 </template>
 
 <script>
-import {MessageBox} from "element-ui";
+import {Dialog} from "element-ui";
 
 export default {
   name: "BudgetListItem",
+
+  components: {
+    Dialog
+  },
 
   props: {
     BudgetItem: {
@@ -23,24 +36,14 @@ export default {
     }
   },
 
-  methods: {
-    deleteItem(id) {
-      const { comment, value, typeTitle } = this.BudgetItem;
+  data: () => ({
+    showDialog: false,
+  }),
 
-      MessageBox.confirm(
-          `Удалить ${typeTitle} "${comment}" и суммой ${value}?`,
-          "Подтверждение удаления",
-          {
-            confirmButtonText: "Да",
-            cancelButtonText: "Нет",
-            type: "warning"
-          }).then((res) => {
-        if ("confirm" === res) {
-          this.$emit("deleteBudgetItem", id);
-        }
-      }).catch(() => {
-      });
-    }
+  methods: {
+    async deleteItem(id) {
+      this.$emit("deleteBudgetItem", id);
+    },
   },
 
   computed: {
