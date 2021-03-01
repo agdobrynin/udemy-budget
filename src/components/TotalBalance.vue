@@ -1,6 +1,6 @@
 <template>
   <ElCard class="balance" :class="isNegative ? 'red': 'green'">
-    Баланс = {{ total }}
+    Баланс = <span class="balance-value">{{ total }}</span>
   </ElCard>
 </template>
 
