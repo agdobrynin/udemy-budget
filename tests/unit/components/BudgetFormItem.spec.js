@@ -66,21 +66,22 @@ describe("Form for add new BudgetItem", () => {
         expect(wrapper.findAll(selectorErrorFormItem).length).toEqual(1);
     });
 
-    it("Validation error, test wrong data value (sum of budget)", async () => {
+    it("Validation error, test wrong 'value' (sum of budget)", async () => {
+        // 2 поля корректные.
         wrapper.vm.formData.type = BudgetItemIncome.typeTitle;
         wrapper.vm.formData.comment = "Привет!";
 
-        // Поле (data) тип операции и комментарий заполнены - поле сумма (value) не число, 1 поле с ошибкой
+        // "value" не число, 1 поле с ошибкой
         wrapper.vm.formData.value = "строка не может быть цифрой";
         await wrapper.find("form").trigger("submit");
         expect(wrapper.findAll(selectorErrorFormItem).length).toEqual(1);
 
-        // Поле (data) тип операции и комментарий заполнены - поле сумма (value) отрицательное число, 1 поле с ошибкой
+        // "value" отрицательное число, 1 поле с ошибкой
         wrapper.vm.formData.value = -10;
         await wrapper.find("form").trigger("submit");
         expect(wrapper.findAll(selectorErrorFormItem).length).toEqual(1);
 
-        // Поле (data) тип операции и комментарий заполнены - поле сумма (value) ноль, 1 поле с ошибкой
+        // "value" ноль, 1 поле с ошибкой
         wrapper.vm.formData.value = 0;
         await wrapper.find("form").trigger("submit");
         expect(wrapper.findAll(selectorErrorFormItem).length).toEqual(1);
