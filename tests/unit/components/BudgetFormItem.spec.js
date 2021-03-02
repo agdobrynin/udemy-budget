@@ -10,11 +10,6 @@ describe("Form for add new BudgetItem", () => {
 
     beforeEach(() => wrapper = mount(BudgetFormItem));
 
-    beforeAll(() => {
-        jest.spyOn(console, "warn").mockImplementation(() => {});
-        jest.spyOn(console, "error").mockImplementation(() => {});
-    });
-
     it("Form exist", () => {
         expect(wrapper.find("form.form-new-budget-item").isVisible()).toBeTruthy();
     });
