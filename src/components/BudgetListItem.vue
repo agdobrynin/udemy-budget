@@ -7,13 +7,14 @@
     <span class="value" :class="isNegative ? 'red': 'green'">{{ BudgetItem.value }}</span>
     <ElButton type="danger" @click.prevent="showDialog = true">удалить</ElButton>
     <Dialog
+        class="confirm-dialog"
         title="Удалить запись?"
         v-if="showDialog"
         :visible.sync="showDialog">
       <p>Удалить {{BudgetItem.typeTitle}} "{{BudgetItem.comment}}" и суммой <strong>{{BudgetItem.value}}</strong></p>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="showDialog = false">Нет</el-button>
-        <el-button type="primary" @click="deleteItem(BudgetItem.id)">Да</el-button>
+        <el-button @click="showDialog = false" class="confirm-no">Нет</el-button>
+        <el-button type="primary" class="confirm-yes" @click="deleteItem(BudgetItem.id)">Да</el-button>
       </span>
     </Dialog>
   </div>
