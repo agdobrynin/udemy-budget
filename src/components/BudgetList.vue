@@ -3,6 +3,12 @@
     <ElCard>
       <div slot="header" class="clearfix header">
         <span>{{ header }}</span>
+        <span v-if="showFilteredBalance"
+              class="filtered-balance"
+              :class="filterTotal > 0 ? 'green' : 'red'">
+          {{filterTotal}}
+        </span>
+
         <radio-group v-model="typeBudget" class="filter">
           <radio-button v-for="(typeBudget, index) in typeOfBudgetTitles"
                         :key="index"
@@ -50,7 +56,6 @@ export default {
   },
 
   data: () => ({
-    header: "Расходы и доходы",
     typeOfBudgetTitles: [],
     typeBudget: FILTER_TYPE_ALL_TITLE,
     filteredList: [],
@@ -59,6 +64,23 @@ export default {
   computed: {
     isEmpty() {
       return !Object.keys(this.filteredList).length;
+    },
+
+    filterTotal() {
+      /** @type{BudgetItemIncome|BudgetItemOutcome} balanceItem */
+      return this.filteredList.reduce((acc, balanceItem) => acc + balanceItem.value ,0);
+    },
+
+    showFilteredBalance() {
+      return !(this.typeBudget === FILTER_TYPE_ALL_TITLE);
+    },
+
+    header() {
+      if (this.typeBudget === FILTER_TYPE_ALL_TITLE) {
+        return "Расходы и доходы";
+      }
+
+      return this.typeBudget;
     },
   },
 
@@ -113,5 +135,18 @@ export default {
 
 .filter {
   margin-left: auto;
+}
+
+.filtered-balance {
+  margin: 0 1em;
+  font-weight: bold;
+}
+
+.red {
+  color: red;
+}
+
+.green {
+  color: green;
 }
 </style>
