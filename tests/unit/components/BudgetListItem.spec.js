@@ -33,7 +33,7 @@ describe("BudgetListItem.vue", () => {
         expect(wrapper.find(".confirm-dialog").exists()).toBeTruthy();
         // кнопка нет
         await wrapper.find(".confirm-dialog button.confirm-yes").trigger("click");
-        // событие (emit) удаления не вызвано
+        // событие (emit) удаления вызвано и передано родителю
         expect(wrapper.emitted().deleteBudgetItem).toBeTruthy();
     });
 });
