@@ -5,11 +5,12 @@
         :rules="rules"
         label-width="120px"
         ref="ruleForm"
+        class="form-new-budget-item"
         @submit.native.prevent="onSave">
       <ElFormItem label="Тип" prop="type">
         <el-row>
           <el-col :span="16">
-            <ElSelect v-model="formData.type">
+            <ElSelect v-model="formData.type" ref="budgetType" class="form-new-budget-type">
               <ElOption v-for="(typeTitle, key) in typeOfBudgetTitles"
                         :key="key"
                         :label="typeTitle"
@@ -26,10 +27,10 @@
         </el-row>
       </ElFormItem>
       <ElFormItem label="Сумма" prop="value">
-        <ElInput v-model.number="formData.value" ref="budgetValue"></ElInput>
+        <ElInput v-model.number="formData.value" class="form-new-budget-value" ref="budgetValue"></ElInput>
       </ElFormItem>
       <ElFormItem label="Комментарий" prop="comment">
-        <ElInput v-model="formData.comment"></ElInput>
+        <ElInput v-model="formData.comment" class="form-new-budget-comment"></ElInput>
       </ElFormItem>
       <ElButton native-type="submit" type="primary">Добавить</ElButton>
     </ElForm>
@@ -85,21 +86,19 @@ export default {
 
   methods: {
     async onSave() {
-      this.$refs.ruleForm.validate((valid) => {
-        if (valid) {
-          const BudgetItem = this.formData.type === BudgetItemIncome.typeTitle
-              ? new BudgetItemIncome(this.formData.comment, this.formData.value)
-              : new BudgetItemOutcome(this.formData.comment, this.formData.value);
-          this.$emit("newBudgetItem", BudgetItem);
-          let prevType = "";
-          if (this.formData.rememberType) {
-            prevType = this.formData.type;
-          }
-          this.$refs.ruleForm.resetFields();
-          this.formData.type = prevType;
-          this.$refs.budgetValue.focus();
+      if (await this.$refs.ruleForm.validate()) {
+        const BudgetItem = this.formData.type === BudgetItemIncome.typeTitle
+            ? new BudgetItemIncome(this.formData.comment, this.formData.value)
+            : new BudgetItemOutcome(this.formData.comment, this.formData.value);
+        this.$emit("newBudgetItem", BudgetItem);
+        let prevType = "";
+        if (this.formData.rememberType) {
+          prevType = this.formData.type;
         }
-      });
+        this.$refs.ruleForm.resetFields();
+        this.formData.type = prevType;
+        this.$refs.budgetValue.focus();
+      }
     }
   },
 }
