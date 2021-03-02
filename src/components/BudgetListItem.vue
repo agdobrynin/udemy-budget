@@ -8,6 +8,7 @@
     <ElButton type="danger" @click.prevent="showDialog = true">удалить</ElButton>
     <Dialog
         title="Удалить запись?"
+        v-if="showDialog"
         :visible.sync="showDialog">
       <p>Удалить {{BudgetItem.typeTitle}} "{{BudgetItem.comment}}" и суммой <strong>{{BudgetItem.value}}</strong></p>
       <span slot="footer" class="dialog-footer">
