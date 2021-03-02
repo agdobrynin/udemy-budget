@@ -6,6 +6,7 @@
         <radio-group v-model="typeBudget" class="filter">
           <radio-button v-for="(typeBudget, index) in typeOfBudgetTitles"
                         :key="index"
+                        class="filter-item"
                         :label="typeBudget">{{typeBudget}}</radio-button>
         </radio-group>
       </div>
@@ -13,10 +14,11 @@
         <BudgetListItem v-for="item in filteredList"
                         :key="item.id"
                         :budget-item="item"
+                        class="budget-item"
                         @deleteBudgetItem="deleteBudgetItem">
         </BudgetListItem>
       </template>
-      <ElAlert v-else type="info" show-icon :closable="false">Записей нет.</ElAlert>
+      <ElAlert v-else type="info" show-icon :closable="false" class="alert-empty">Записей нет.</ElAlert>
     </ElCard>
   </div>
 </template>
@@ -28,7 +30,7 @@ import {BudgetItemIncome} from "@/Entity/BudgetItemIncome";
 import {BudgetItemOutcome} from "@/Entity/BudgetItemOutcome";
 import {RadioGroup, RadioButton} from "element-ui";
 
-const FILTER_TYPE_ALL_TITLE = "Всё";
+export const FILTER_TYPE_ALL_TITLE = "Всё";
 
 export default {
   name: "BudgetList",
