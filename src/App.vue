@@ -40,6 +40,7 @@ export default {
         this.$delete(this.list, index);
       }
     },
+
     /**
      * Добавить новый доход/расход
      * @param {BudgetItemOutcome|BudgetItemIncome} budgetEntity
