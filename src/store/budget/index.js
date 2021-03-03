@@ -1,0 +1,42 @@
+import Vue from "vue";
+
+export default {
+    namespaced: true,
+
+    state : {
+        /**
+         * @type{Object<BudgetItemIncome|BudgetItemOutcome>} items
+         */
+        items: {},
+    },
+
+    getters: {
+        getBudgetItems: ({items}) => Object.values(items),
+
+        getTotal: ({items}) => {
+            /** @type{BudgetItemIncome|BudgetItemOutcome} budgetItem */
+            return Object.values(items).reduce((acc, budgetItem) => acc + budgetItem.value, 0)
+        },
+    },
+
+    mutations: {
+        /** @type{BudgetItemIncome|BudgetItemOutcome} budgetItem */
+        ADD_ITEM(state, budgetItem) {
+            Vue.set(state.items, budgetItem.id, budgetItem);
+        },
+
+        DELETE_ITEM(state, budgetItemUid) {
+            Vue.delete(state.items, budgetItemUid);
+        }
+    },
+
+    actions: {
+        addItem({commit}, budgetItem) {
+            commit("ADD_ITEM", budgetItem);
+        },
+
+        deleteItem({commit}, budgetItemUid) {
+            commit("DELETE_ITEM", budgetItemUid);
+        }
+    },
+}
