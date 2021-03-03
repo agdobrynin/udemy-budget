@@ -17,6 +17,14 @@ export default {
             /** @type{BudgetItemIncome|BudgetItemOutcome} budgetItem */
             return Object.values(items).reduce((acc, budgetItem) => acc + budgetItem.value, 0)
         },
+
+        getBudgetItemByType: (store, getters) => budgetTitle => {
+            if (budgetTitle === undefined || !budgetTitle) {
+                return getters.getBudgetItems;
+            }
+
+            return getters.getBudgetItems.filter(budgetItem => budgetItem.typeTitle === budgetTitle);
+        },
     },
 
     mutations: {

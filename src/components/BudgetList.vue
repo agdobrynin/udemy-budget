@@ -52,11 +52,16 @@ export default {
   data: () => ({
     typeOfBudgetTitles: [],
     typeBudget: FILTER_TYPE_ALL_TITLE,
-    filteredList: [],
   }),
 
   computed: {
-    ...mapGetters("budget", ["getBudgetItems"]),
+    ...mapGetters("budget", ["getBudgetItems", "getBudgetItemByType",]),
+
+    filteredList() {
+      const budgetTitle = this.typeBudget === FILTER_TYPE_ALL_TITLE ? "" : this.typeBudget;
+
+      return this.getBudgetItemByType(budgetTitle);
+    },
 
     isEmpty() {
       return !Object.keys(this.filteredList).length;
@@ -98,34 +103,12 @@ export default {
     deleteBudgetItem(id) {
       this.deleteItem(id);
     },
-
-    filter(type) {
-      if (FILTER_TYPE_ALL_TITLE === type) {
-        this.filteredList = this.getBudgetItems;
-        return;
-      }
-
-      this.filteredList = this.getBudgetItems.filter((item) => {
-        return item.typeTitle === type;
-      });
-    }
-  },
-
-  watch: {
-    getBudgetItems() {
-      this.filter(this.typeBudget);
-    },
-
-    typeBudget() {
-      this.filter(this.typeBudget);
-    },
   },
 
   created() {
     this.typeOfBudgetTitles.push(this.typeBudget);
     this.typeOfBudgetTitles.push(BudgetItemIncome.typeTitle);
     this.typeOfBudgetTitles.push(BudgetItemOutcome.typeTitle);
-    this.filteredList = this.getBudgetItems;
   },
 }
 </script>
