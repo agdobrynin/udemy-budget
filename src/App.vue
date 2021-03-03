@@ -2,6 +2,7 @@
   <div id="app">
     <BudgetFormItem @newBudgetItem="addItem"></BudgetFormItem>
     <TotalBalance v-if="getTotal !==0" :total="getTotal"></TotalBalance>
+    <p v-else></p>
     <BudgetList></BudgetList>
   </div>
 </template>
