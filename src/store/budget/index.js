@@ -35,6 +35,10 @@ export default {
 
         DELETE_ITEM(state, budgetItemUid) {
             Vue.delete(state.items, budgetItemUid);
+        },
+
+        CLEAR_ITEMS(state) {
+            state.items = {};
         }
     },
 
@@ -45,6 +49,10 @@ export default {
 
         deleteItem({commit}, budgetItemUid) {
             commit("DELETE_ITEM", budgetItemUid);
+        },
+
+        clearItems({commit}) {
+            commit("CLEAR_ITEMS");
         }
     },
 }
