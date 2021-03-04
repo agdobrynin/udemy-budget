@@ -1,28 +1,30 @@
 <template>
   <div class="budget-list-wrap">
     <ElCard>
-      <div slot="header" class="clearfix header">
-        <span>{{ header }}</span>
-        <span v-if="showFilteredBalance"
-              class="filtered-balance"
-              :class="filterTotalClassName">
-          {{ filterTotal }}
-        </span>
-
-        <radio-group v-model="typeBudget" class="filter">
-          <radio-button v-for="(typeBudget, index) in typeOfBudgetTitles"
-                        :key="index"
-                        class="filter-item"
-                        :label="typeBudget">{{ typeBudget }}
-          </radio-button>
-        </radio-group>
-      </div>
+      <ElRow :gutter="10" slot="header" align="middle" type="flex">
+        <ElCol v-if="showFilteredBalance" :span="12" :class="filterTotalClassName">{{ header }}: {{
+            filterTotal
+          }}
+        </ElCol>
+        <ElCol v-else span="12">
+          <el-button size="small" @click="clearItems" :disabled="isEmpty">удалить всё</el-button>
+        </ElCol>
+        <ElCol span="12">
+          <radio-group v-model="typeBudget" class="filter" size="small">
+            <radio-button v-for="(typeBudget, index) in typeOfBudgetTitles"
+                          :key="index"
+                          class="filter-item"
+                          :label="typeBudget">{{ typeBudget }}
+            </radio-button>
+          </radio-group>
+        </ElCol>
+      </ElRow>
       <template v-if="!isEmpty">
         <BudgetListItem v-for="item in filteredList"
                         :key="item.id"
                         :budget-item="item"
                         class="budget-item"
-                        @deleteBudgetItem="deleteBudgetItem">
+                        @deleteBudgetItem="deleteItem">
         </BudgetListItem>
       </template>
       <ElAlert v-else type="info" show-icon :closable="false" class="alert-empty">Записей нет.</ElAlert>
@@ -46,7 +48,7 @@ export default {
   components: {
     BudgetListItem,
     RadioGroup,
-    RadioButton
+    RadioButton,
   },
 
   data: () => ({
@@ -98,11 +100,7 @@ export default {
   },
 
   methods: {
-    ...mapActions("budget", ["deleteItem"]),
-
-    deleteBudgetItem(id) {
-      this.deleteItem(id);
-    },
+    ...mapActions("budget", ["deleteItem", "clearItems"]),
   },
 
   created() {
@@ -116,23 +114,6 @@ export default {
 <style scoped>
 .budget-list-wrap {
   margin: auto;
-}
-
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-flow: row wrap;
-  align-content: stretch;
-}
-
-.filter {
-  margin-left: auto;
-}
-
-.filtered-balance {
-  margin: 0 1em;
-  font-weight: bold;
 }
 
 .red {
