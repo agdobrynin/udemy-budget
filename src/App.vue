@@ -4,6 +4,16 @@
     <TotalBalance v-if="getTotal !==0" :total="getTotal"></TotalBalance>
     <p v-else></p>
     <BudgetList></BudgetList>
+    <Dialog
+        class="confirm-dialog"
+        title="Заполнить тестовыми данными?"
+        v-if="showDialog"
+        :visible.sync="showDialog">
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="showDialog = false" class="confirm-no">Нет</el-button>
+        <el-button type="primary" class="confirm-yes" @click="fillTestBudget">Да</el-button>
+      </span>
+    </Dialog>
   </div>
 </template>
 
@@ -14,6 +24,7 @@ import BudgetFormItem from "@/components/BudgetFormItem";
 import {mapGetters, mapActions} from "vuex";
 import {BudgetItemIncome} from "@/Entity/BudgetItemIncome";
 import {BudgetItemOutcome} from "@/Entity/BudgetItemOutcome";
+import {Dialog} from "element-ui";
 
 export default {
   name: "App",
@@ -22,10 +33,21 @@ export default {
     BudgetList,
     TotalBalance,
     BudgetFormItem,
+    Dialog,
   },
+
+  data: () => ({
+    showDialog: false,
+  }),
 
   methods: {
     ...mapActions("budget", ["addItem"]),
+
+    fillTestBudget() {
+      this.addItem(new BudgetItemIncome("Первое поступление", 100));
+      this.addItem(new BudgetItemOutcome("Первый расход", 50));
+      this.showDialog = false;
+    },
   },
 
   computed: {
@@ -33,8 +55,9 @@ export default {
   },
 
   created: function () {
-    this.addItem(new BudgetItemIncome("Первое поступление", 100));
-    this.addItem(new BudgetItemOutcome("Первый расход", 50));
+    if (!this.getBudgetItems.length) {
+      this.showDialog = true;
+    }
   },
 }
 </script>
