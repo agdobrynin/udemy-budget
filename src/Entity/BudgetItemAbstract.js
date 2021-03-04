@@ -12,6 +12,7 @@ export class BudgetItemAbstract {
         this.comment = comment || undefined;
         this._value = Math.abs(Number(value)) || NaN;
         this.id = BudgetItemAbstract.uid;
+        this.className = this.constructor.name;
     }
 
     get value() {
