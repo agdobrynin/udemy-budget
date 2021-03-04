@@ -2,9 +2,8 @@
   <div class="budget-list-wrap">
     <ElCard>
       <ElRow :gutter="10" slot="header" align="middle" type="flex">
-        <ElCol v-if="showFilteredBalance" :span="12" :class="filterTotalClassName">{{ header }}: {{
-            filterTotal
-          }}
+        <ElCol v-if="showFilteredBalance" :span="12" :class="filterTotalClassName">
+          {{ this.typeBudget }}: {{ filterTotal}}
         </ElCol>
         <ElCol v-else span="12">
           <el-button size="small" @click="clearItems" :disabled="isEmpty">удалить всё</el-button>
@@ -88,14 +87,6 @@ export default {
 
     showFilteredBalance() {
       return !(this.typeBudget === FILTER_TYPE_ALL_TITLE);
-    },
-
-    header() {
-      if (this.typeBudget === FILTER_TYPE_ALL_TITLE) {
-        return "Расходы и доходы";
-      }
-
-      return this.typeBudget;
     },
   },
 
