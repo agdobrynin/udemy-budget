@@ -3,7 +3,7 @@ import Vue from "vue";
 export default {
     namespaced: true,
 
-    state : {
+    state: {
         /**
          * @type{Object<BudgetItemIncome|BudgetItemOutcome>} items
          */
@@ -14,7 +14,7 @@ export default {
         getBudgetItems: ({items}) => Object.values(items),
 
         getTotal: ({items}) => {
-            /** @type{BudgetItemIncome|BudgetItemOutcome} budgetItem */
+            /** @type {BudgetItemIncome|BudgetItemOutcome} budgetItem */
             return Object.values(items).reduce((acc, budgetItem) => acc + budgetItem.value, 0)
         },
 
@@ -28,11 +28,18 @@ export default {
     },
 
     mutations: {
-        /** @type{BudgetItemIncome|BudgetItemOutcome} budgetItem */
+        /**
+         * @param {Object} state
+         * @param {BudgetItemIncome|BudgetItemOutcome} budgetItem
+         */
         ADD_ITEM(state, budgetItem) {
             Vue.set(state.items, budgetItem.id, budgetItem);
         },
 
+        /**
+         * @param {Object} state
+         * @param {string} budgetItemUid
+         */
         DELETE_ITEM(state, budgetItemUid) {
             Vue.delete(state.items, budgetItemUid);
         },
@@ -43,6 +50,10 @@ export default {
     },
 
     actions: {
+        /**
+         * @param commit
+         * @param {BudgetItemIncome|BudgetItemOutcome} budgetItem
+         */
         addItem({commit}, budgetItem) {
             commit("ADD_ITEM", budgetItem);
         },
