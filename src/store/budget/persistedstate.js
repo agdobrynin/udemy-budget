@@ -21,6 +21,7 @@ export const parseStorageItems = (jsonString) => {
         }, {});
     // eslint-disable-next-line no-empty
     } catch (e) {
+        console.error(e);
     }
 
     return restoreStorage;
@@ -28,5 +29,6 @@ export const parseStorageItems = (jsonString) => {
 
 export default createPersistedState({
     paths: ["budget"],
+    key: "budget-application-store",
     getState: (key, storage) => parseStorageItems(storage.getItem(key)),
 });

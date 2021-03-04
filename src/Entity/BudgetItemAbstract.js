@@ -3,6 +3,7 @@ export class BudgetItemAbstract {
     _value = NaN;
     id = undefined;
     static _typeTitle = undefined;
+    className = "BudgetItemAbstract";
 
     /**
      * @param {String} comment
@@ -13,7 +14,6 @@ export class BudgetItemAbstract {
         this.comment = comment || undefined;
         this._value = Math.abs(Number(value)) || NaN;
         this.id = !id ? BudgetItemAbstract.uid : id;
-        this.className = this.constructor.name;
     }
 
     get value() {
