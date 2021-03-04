@@ -34,11 +34,11 @@ describe("BudgetListItem.vue", ()=> {
     it("List is not empty", () => {
         const outcome = new BudgetItemOutcome("Расход", 10);
         const income = new BudgetItemIncome("Доход", 10);
-        store.state.budget.items = {
-            outcome,
-            income,
-        };
+
+        store.dispatch("budget/addItem", outcome);
+        store.dispatch("budget/addItem", income);
         const wrap = mount(BudgetList, { store, localVue });
+
 
 
         expect(wrap.find(selectorAlertEmpty).exists()).toBeFalsy();
