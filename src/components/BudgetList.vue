@@ -2,7 +2,7 @@
   <div class="budget-list-wrap">
     <ElCard>
       <ElRow :gutter="10" slot="header" align="middle" type="flex">
-        <ElCol v-if="showFilteredBalance" :span="12" :class="filterTotalClassName">
+        <ElCol v-if="showFilteredBalance" span="12" :class="filterTotalClassName">
           {{ this.typeBudget }}: {{ filterTotal}}
         </ElCol>
         <ElCol v-else span="12">
