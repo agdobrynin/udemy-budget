@@ -13,16 +13,21 @@ describe("Base test store for budget", () => {
             modules: {
                 budget,
             },
-        })
+        });
     });
 
-    it("Test action addItem, deleteItem", () => {
+    it("Test action addItem, deleteItem, clearItems", () => {
         const budgetOut = new BudgetItemOutcome("A", 10);
         expect(store.getters["budget/getTotal"]).toBe(0);
         store.dispatch("budget/addItem", budgetOut)
         expect(store.getters["budget/getTotal"]).toBe(budgetOut.value);
         store.dispatch("budget/deleteItem", budgetOut.id);
         expect(store.getters["budget/getTotal"]).toBe(0);
+
+        store.dispatch("budget/addItem", budgetOut);
+        expect(store.getters["budget/getBudgetItems"]).toEqual([budgetOut]);
+        store.dispatch("budget/clearItems");
+        expect(store.getters["budget/getBudgetItems"]).toEqual([]);
     });
 
     it("Test getters", () => {

@@ -1,4 +1,4 @@
-import {mount, createLocalVue} from "@vue/test-utils";
+import {createLocalVue, mount, shallowMount} from "@vue/test-utils";
 import Vuex from "vuex";
 import "@/plugins/elements";
 import BudgetList, {FILTER_TYPE_ALL_TITLE} from "@/components/BudgetList";
@@ -25,7 +25,7 @@ describe("BudgetListItem.vue", ()=> {
     });
 
     it("List is empty", () => {
-        const wrap = mount(BudgetList, { store, localVue });
+        const wrap = shallowMount(BudgetList, { store, localVue });
 
         expect(wrap.find(selectorAlertEmpty).exists()).toBeTruthy();
         expect(wrap.find(selectorBudgetItem).exists()).toBeFalsy();
@@ -37,13 +37,10 @@ describe("BudgetListItem.vue", ()=> {
 
         store.dispatch("budget/addItem", outcome);
         store.dispatch("budget/addItem", income);
-        const wrap = mount(BudgetList, { store, localVue });
-
-
-
-        expect(wrap.find(selectorAlertEmpty).exists()).toBeFalsy();
+        const wrap = shallowMount(BudgetList, { store, localVue });
         expect(wrap.find(selectorBudgetItem).exists()).toBeTruthy();
         expect(wrap.findAll(selectorBudgetItem).length).toEqual(2);
+        expect(wrap.find(selectorAlertEmpty).exists()).toBeFalsy();
     });
 
     it("Filter income, outcome items", async () => {
@@ -51,11 +48,11 @@ describe("BudgetListItem.vue", ()=> {
         const income = new BudgetItemIncome("Доход", 10);
         const income2 = new BudgetItemIncome("Доход 2", 10);
 
-        store.state.budget.items = {
-            outcome,
-            income,
-            income2,
-        };
+        store.dispatch("budget/clearItems");
+        store.dispatch("budget/addItem", outcome);
+        store.dispatch("budget/addItem", income);
+        store.dispatch("budget/addItem", income2);
+
         const wrap = mount(BudgetList, { store, localVue });
 
         wrap.find(`input[type=radio][value=${FILTER_TYPE_ALL_TITLE}]`).trigger("click");
