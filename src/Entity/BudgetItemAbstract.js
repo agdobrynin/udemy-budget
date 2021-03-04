@@ -7,11 +7,12 @@ export class BudgetItemAbstract {
     /**
      * @param {String} comment
      * @param {Number} value
+     * @param {String|null} id
      */
-    constructor(comment, value) {
+    constructor(comment, value, id = null) {
         this.comment = comment || undefined;
         this._value = Math.abs(Number(value)) || NaN;
-        this.id = BudgetItemAbstract.uid;
+        this.id = !id ? BudgetItemAbstract.uid : id;
         this.className = this.constructor.name;
     }
 

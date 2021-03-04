@@ -1,0 +1,18 @@
+{
+  "budget": {
+    "items": {
+      "KLV1FBTZL0TW9": {
+        "comment": "Первое поступление",
+        "_value": 100,
+        "id": "KLV1FBTZL0TW9",
+        "className": "BudgetItemIncome"
+      },
+      "KLV1FBU1H4C94": {
+        "comment": "Первый расход",
+        "_value": 50,
+        "id": "KLV1FBU1H4C94",
+        "className": "BudgetItemOutcome"
+      }
+    }
+  }
+}

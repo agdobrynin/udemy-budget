@@ -19,6 +19,17 @@ describe("BudgetItemIncome entity", () => {
         expect(budgetIncome.value).toEqual(value);
     });
 
+    it("Init with constructor and id", () => {
+        const comment = "Привет";
+        const value = 150;
+        const id = "KLV1FBTZL0TW9";
+        const budgetIncome = new BudgetItemIncome(comment, value, id);
+
+        expect(budgetIncome.comment).toEqual(comment);
+        expect(budgetIncome.value).toEqual(value);
+        expect(budgetIncome.id).toEqual(id);
+    });
+
     it("Set negative value", () => {
         const value = 150;
         const budgetIncome = new BudgetItemIncome("", -value);
