@@ -5,7 +5,7 @@ describe("BudgetItemIncome entity", () => {
         const budgetIncome = new BudgetItemIncome();
 
         expect(budgetIncome.id).toMatch(/([a-z0-9]{10,})/i);
-        expect(budgetIncome.typeTitle).toEqual("Доход");
+        expect(budgetIncome.constructor.typeTitle).toEqual("Доход");
         expect(budgetIncome.comment).toEqual(undefined);
         expect(budgetIncome.value).toEqual(NaN);
     });

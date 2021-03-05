@@ -23,7 +23,7 @@ export default {
                 return getters.getBudgetItems;
             }
 
-            return getters.getBudgetItems.filter(budgetItem => budgetItem.typeTitle === budgetTitle);
+            return getters.getBudgetItems.filter(budgetItem => budgetItem.constructor?.typeTitle === budgetTitle);
         },
     },
 

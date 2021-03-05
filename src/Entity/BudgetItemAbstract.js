@@ -1,7 +1,4 @@
 export default class BudgetItemAbstract {
-    comment = undefined;
-    _value = NaN;
-    id = undefined;
     static _typeTitle = undefined;
 
     /**
@@ -18,10 +15,6 @@ export default class BudgetItemAbstract {
 
     get value() {
         return this._value;
-    }
-
-    get typeTitle() {
-        return this.constructor._typeTitle;
     }
 
     static get typeTitle() {
