@@ -39,8 +39,8 @@
 
 <script>
 
-import {BudgetItemIncome} from "@/Entity/BudgetItemIncome";
-import {BudgetItemOutcome} from "@/Entity/BudgetItemOutcome";
+import BudgetItemIncome from "@/Entity/BudgetItemIncome";
+import BudgetItemOutcome from "@/Entity/BudgetItemOutcome";
 
 const checkSum = (rule, value, callback) => {
   if (+value <= 0) {

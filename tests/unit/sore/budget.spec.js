@@ -1,8 +1,8 @@
 import {createLocalVue} from "@vue/test-utils";
 import Vuex from "vuex";
 import budget from "@/store/budget";
-import {BudgetItemOutcome} from "@/Entity/BudgetItemOutcome";
-import {BudgetItemIncome} from "@/Entity/BudgetItemIncome";
+import BudgetItemOutcome from "@/Entity/BudgetItemOutcome";
+import BudgetItemIncome from "@/Entity/BudgetItemIncome";
 
 describe("Base test store for budget", () => {
     let store;

@@ -22,8 +22,8 @@ import BudgetList from "@/components/BudgetList";
 import TotalBalance from "@/components/TotalBalance";
 import BudgetFormItem from "@/components/BudgetFormItem";
 import {mapGetters, mapActions} from "vuex";
-import {BudgetItemIncome} from "@/Entity/BudgetItemIncome";
-import {BudgetItemOutcome} from "@/Entity/BudgetItemOutcome";
+import BudgetItemIncome from "@/Entity/BudgetItemIncome";
+import BudgetItemOutcome from "@/Entity/BudgetItemOutcome";
 import {Dialog} from "element-ui";
 
 export default {

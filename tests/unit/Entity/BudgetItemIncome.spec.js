@@ -1,4 +1,4 @@
-const {BudgetItemIncome} = require("@/Entity/BudgetItemIncome");
+import BudgetItemIncome from "@/Entity/BudgetItemIncome";
 
 describe("BudgetItemIncome entity", () => {
     it("Init with empty constructor", () => {

@@ -1,7 +1,7 @@
 import {mount} from "@vue/test-utils";
 import "@/plugins/elements";
 import BudgetFormItem from "@/components/BudgetFormItem";
-import {BudgetItemIncome} from "@/Entity/BudgetItemIncome";
+import BudgetItemIncome from "@/Entity/BudgetItemIncome";
 
 const selectorErrorFormItem = ".el-form-item.is-error";
 

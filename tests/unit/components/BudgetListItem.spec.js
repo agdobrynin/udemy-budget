@@ -1,7 +1,7 @@
 import {mount} from "@vue/test-utils";
 import "@/plugins/elements";
 import BudgetListItem from "@/components/BudgetListItem";
-import {BudgetItemIncome} from "@/Entity/BudgetItemIncome";
+import BudgetItemIncome from "@/Entity/BudgetItemIncome";
 
 const component = (BudgetItem) => mount(BudgetListItem, {propsData: {BudgetItem},});
 

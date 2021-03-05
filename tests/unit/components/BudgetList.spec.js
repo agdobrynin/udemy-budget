@@ -2,8 +2,8 @@ import {createLocalVue, mount, shallowMount} from "@vue/test-utils";
 import Vuex from "vuex";
 import "@/plugins/elements";
 import BudgetList, {FILTER_TYPE_ALL_TITLE} from "@/components/BudgetList";
-import {BudgetItemOutcome} from "@/Entity/BudgetItemOutcome";
-import {BudgetItemIncome} from "@/Entity/BudgetItemIncome";
+import BudgetItemOutcome from "@/Entity/BudgetItemOutcome";
+import BudgetItemIncome from "@/Entity/BudgetItemIncome";
 import budget from "@/store/budget/";
 
 const localVue = createLocalVue()

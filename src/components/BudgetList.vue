@@ -34,8 +34,8 @@
 <script>
 
 import BudgetListItem from "@/components/BudgetListItem";
-import {BudgetItemIncome} from "@/Entity/BudgetItemIncome";
-import {BudgetItemOutcome} from "@/Entity/BudgetItemOutcome";
+import BudgetItemIncome from "@/Entity/BudgetItemIncome";
+import BudgetItemOutcome from "@/Entity/BudgetItemOutcome";
 import {RadioGroup, RadioButton} from "element-ui";
 import {mapActions, mapGetters} from "vuex";
 

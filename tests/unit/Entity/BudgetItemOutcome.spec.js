@@ -1,4 +1,4 @@
-const {BudgetItemOutcome} = require("@/Entity/BudgetItemOutcome");
+import BudgetItemOutcome from "@/Entity/BudgetItemOutcome";
 
 describe("BudgetItemOutcome entity", () => {
     it("Init with empty constructor", () => {

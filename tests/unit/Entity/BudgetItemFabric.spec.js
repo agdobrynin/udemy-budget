@@ -1,7 +1,7 @@
 import storageItems from "../storageItems.json";
 import BudgetItemFabric from "@/Entity/BudgetItemFabric";
-import {BudgetItemIncome} from "@/Entity/BudgetItemIncome";
-import {BudgetItemOutcome} from "@/Entity/BudgetItemOutcome";
+import BudgetItemIncome from "@/Entity/BudgetItemIncome";
+import BudgetItemOutcome from "@/Entity/BudgetItemOutcome";
 
 describe("BudgetItemIncome entity", () => {
     it("Test BudgetItemFabric", () => {
