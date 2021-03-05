@@ -56,12 +56,12 @@ export default {
   }),
 
   computed: {
-    ...mapGetters("budget", ["getBudgetItems", "getBudgetItemByType",]),
+    ...mapGetters("budget", ["getBudgetItems", "getBudgetItemByTitle",]),
 
     filteredList() {
       const budgetTitle = this.typeBudget === FILTER_TYPE_ALL_TITLE ? "" : this.typeBudget;
 
-      return this.getBudgetItemByType(budgetTitle);
+      return this.getBudgetItemByTitle(budgetTitle);
     },
 
     isEmpty() {

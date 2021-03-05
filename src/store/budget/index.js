@@ -18,7 +18,7 @@ export default {
             return Object.values(items).reduce((acc, budgetItem) => acc + budgetItem.value, 0)
         },
 
-        getBudgetItemByType: (store, getters) => budgetTitle => {
+        getBudgetItemByTitle: (store, getters) => budgetTitle => {
             if (budgetTitle === undefined || !budgetTitle) {
                 return getters.getBudgetItems;
             }

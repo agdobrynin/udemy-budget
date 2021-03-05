@@ -33,8 +33,8 @@ describe("Base test store for budget", () => {
     it("Test getters", () => {
         const budgetOut = new BudgetItemOutcome("A", 10);
         store.dispatch("budget/addItem", budgetOut);
-        expect(store.getters["budget/getBudgetItemByType"](budgetOut.typeTitle)).toEqual([budgetOut]);
-        expect(store.getters["budget/getBudgetItemByType"](BudgetItemIncome.typeTitle)).toEqual([]);
+        expect(store.getters["budget/getBudgetItemByTitle"](budgetOut.typeTitle)).toEqual([budgetOut]);
+        expect(store.getters["budget/getBudgetItemByTitle"](BudgetItemIncome.typeTitle)).toEqual([]);
 
         const budgetIn = new BudgetItemIncome("B", 10);
         store.dispatch("budget/addItem", budgetIn);
