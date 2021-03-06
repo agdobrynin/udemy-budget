@@ -21,6 +21,8 @@
             <el-switch
                 v-model="formData.rememberType"
                 active-text="Запомнить"
+                class="form-new-remember"
+                :disabled="formData.type === undefined"
                 @change="setRememberBudgetType">
             </el-switch>
           </el-col>

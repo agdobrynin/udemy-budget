@@ -27,6 +27,15 @@ describe("Form for add new BudgetItem", () => {
         expect(wrapper.find("form.form-new-budget-item").isVisible()).toBeTruthy();
     });
 
+    it("Disabled remember option", async () => {
+        await wrapper.find(".form-new-budget-type").trigger("change");
+        expect(wrapper.find(".form-new-remember input[type=checkbox]").element.disabled).toBeTruthy();
+        // Данные в поле тип операции.
+        wrapper.vm.formData.type = BudgetItemIncome.typeTitle;
+        await wrapper.find(".form-new-budget-type").trigger("change");
+        expect(wrapper.find(".form-new-remember input[type=checkbox]").element.disabled).toBeFalsy();
+    }),
+
     it("Budget income", async () => {
         // Данные в поле тип операции.
         wrapper.vm.formData.type = BudgetItemIncome.typeTitle;
