@@ -8,6 +8,8 @@ export default {
          * @type{Object<BudgetItemIncome|BudgetItemOutcome>} items
          */
         items: {},
+        rememberBudgetType: false,
+        budgetTypeTitle: undefined,
     },
 
     getters: {
@@ -25,6 +27,10 @@ export default {
 
             return getters.getBudgetItems.filter(budgetItem => budgetItem.constructor?.typeTitle === budgetTitle);
         },
+
+        getRememberBudgetType: ({rememberBudgetType}) => rememberBudgetType,
+
+        getBudgetTypeTitle: ({budgetTypeTitle}) => budgetTypeTitle,
     },
 
     mutations: {
@@ -46,7 +52,15 @@ export default {
 
         CLEAR_ITEMS(state) {
             state.items = {};
-        }
+        },
+
+        SET_REMEMBER_BUDGET_TYPE(state, isRemember) {
+            state.rememberBudgetType = isRemember;
+        },
+
+        SET_BUDGET_TYPE_TITLE(state, budgetTypeTitle) {
+            state.budgetTypeTitle = budgetTypeTitle;
+        },
     },
 
     actions: {
@@ -64,6 +78,14 @@ export default {
 
         clearItems({commit}) {
             commit("CLEAR_ITEMS");
-        }
+        },
+
+        setRememberBudgetType({commit}, isRemember) {
+            commit("SET_REMEMBER_BUDGET_TYPE", isRemember);
+        },
+
+        setBudgetTypeTitle({commit}, budgetTypeTitle) {
+            commit("SET_BUDGET_TYPE_TITLE", budgetTypeTitle);
+        },
     },
 }

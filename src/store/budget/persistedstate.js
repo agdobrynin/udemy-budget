@@ -6,27 +6,28 @@ import BudgetItemFabric from "@/Entity/BudgetItemFabric";
  * @param {string} jsonString
  */
 export const parseStorageItems = (jsonString) => {
-    const restoreStorage = {budget: {items: {}}};
-
     try {
         if (typeof jsonString === "undefined") {
             throw Error("ups.");
         }
 
-        const sourceItems = JSON.parse(jsonString).budget.items;
+        const store = JSON.parse(jsonString);
 
-        restoreStorage.budget.items = Object.values(sourceItems).reduce((acc, item) => {
+        const items = Object.values(store.budget.items).reduce((acc, item) => {
             const budgetItem = BudgetItemFabric.make(item);
             acc[budgetItem.id] = budgetItem;
 
             return acc;
         }, {});
+
+        store.budget.items = items;
+
+        return store;
+
         // eslint-disable-next-line no-empty
     } catch (e) {
-        console.error(e);
+        return {};
     }
-
-    return restoreStorage;
 };
 
 export default createPersistedState({

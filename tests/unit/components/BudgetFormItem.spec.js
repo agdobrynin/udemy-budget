@@ -1,14 +1,27 @@
-import {mount} from "@vue/test-utils";
+import {createLocalVue, mount} from "@vue/test-utils";
 import "@/plugins/elements";
 import BudgetFormItem from "@/components/BudgetFormItem";
 import BudgetItemIncome from "@/Entity/BudgetItemIncome";
+import Vuex from "vuex";
+import budget from "./BudgetList.spec";
 
 const selectorErrorFormItem = ".el-form-item.is-error";
 
-describe("Form for add new BudgetItem", () => {
-    let wrapper;
+const localVue = createLocalVue()
+localVue.use(Vuex);
 
-    beforeEach(() => wrapper = mount(BudgetFormItem));
+describe("Form for add new BudgetItem", () => {
+    let wrapper, store;
+
+    beforeEach(() => {
+        store = new Vuex.Store({
+                modules: {
+                    budget,
+                },
+            },
+        );
+        wrapper = mount(BudgetFormItem, { store, localVue });
+    });
 
     it("Form exist", () => {
         expect(wrapper.find("form.form-new-budget-item").isVisible()).toBeTruthy();

@@ -10,7 +10,7 @@
       <ElFormItem label="Тип" prop="type">
         <el-row>
           <el-col :span="16">
-            <ElSelect v-model="formData.type" ref="budgetType" class="form-new-budget-type">
+            <ElSelect v-model="formData.type" ref="budgetType" class="form-new-budget-type" @change="setBudgetTypeTitle">
               <ElOption v-for="(typeTitle, key) in typeOfBudgetTitles"
                         :key="key"
                         :label="typeTitle"
@@ -21,7 +21,7 @@
             <el-switch
                 v-model="formData.rememberType"
                 active-text="Запомнить"
-                inactive-text="">
+                @change="setRememberBudgetType">
             </el-switch>
           </el-col>
         </el-row>
@@ -41,6 +41,7 @@
 
 import BudgetItemIncome from "@/Entity/BudgetItemIncome";
 import BudgetItemOutcome from "@/Entity/BudgetItemOutcome";
+import {mapActions, mapGetters} from "vuex";
 
 const checkSum = (rule, value, callback) => {
   if (+value <= 0) {
@@ -82,9 +83,19 @@ export default {
   created() {
     this.typeOfBudgetTitles.push(BudgetItemIncome.typeTitle);
     this.typeOfBudgetTitles.push(BudgetItemOutcome.typeTitle);
+    this.formData.rememberType = this.getRememberBudgetType;
+    if (this.formData.rememberType) {
+      this.formData.type = this.getBudgetTypeTitle;
+    }
+  },
+
+  computed: {
+    ...mapGetters("budget", ["getRememberBudgetType", "getBudgetTypeTitle",]),
   },
 
   methods: {
+    ...mapActions("budget", ["setRememberBudgetType", "setBudgetTypeTitle",]),
+
     async onSave() {
       if (await this.$refs.ruleForm.validate()) {
         const BudgetItem = this.formData.type === BudgetItemIncome.typeTitle
@@ -92,7 +103,7 @@ export default {
             : new BudgetItemOutcome(this.formData.comment, this.formData.value);
         this.$emit("newBudgetItem", BudgetItem);
         let prevType = "";
-        if (this.formData.rememberType) {
+        if (this.rememberType) {
           prevType = this.formData.type;
         }
         this.$refs.ruleForm.resetFields();
